@@ -1,0 +1,55 @@
+
+dataset_name = own_data
+datadir = ./data/my_object
+expname =  tensorf_camera_VM
+basedir = ./data/my_object/log
+
+n_iters = 60000
+batch_size = 4096
+
+#N_voxel_init = 2097156 # 128**3
+N_voxel_init = 262144  # 64**3 (降为1/8)
+#N_voxel_final = 27000000 # 300**3
+N_voxel_final = 8847360  # 208**3 (降为1/3)
+#upsamp_list = [2000,3000,4000,5500,7000]
+upsamp_list = [5000, 15000, 25000, 40000]
+#update_AlphaMask_list = [2000,4000]
+update_AlphaMask_list = [10000, 30000]
+
+N_vis = 5
+vis_every = 10000
+
+render_test = 1
+
+#n_lamb_sigma = [16,16,16]
+#n_lamb_sh = [48,48,48]
+n_lamb_sigma = [12,12,12]  # 降维25%
+n_lamb_sh = [36,36,36]    # 降维25%
+
+model_name = TensorVMSplit
+
+
+shadingMode = MLP_Fea
+fea2denseAct = softplus
+
+view_pe = 2
+fea_pe = 2
+
+view_pe = 2
+fea_pe = 2
+
+TV_weight_density = 0.01 #降为原本1/10
+TV_weight_app = 0.001
+
+L1_weight_inital = 1e-4  # 新增(原配置缺失)
+L1_weight_rest = 5e-5
+
+rm_weight_mask_thre = 1e-4
+
+## please uncomment following configuration if hope to training on cp model
+#model_name = TensorCP
+#n_lamb_sigma = [96]
+#n_lamb_sh = [288]
+#N_voxel_final = 125000000 # 500**3
+#L1_weight_inital = 1e-5
+#L1_weight_rest = 1e-5
